@@ -17,15 +17,15 @@ const loadKeycloakData = () => new Promise((resolve, reject) => {
     return resolve();
   }
  
-  let keycloakInstalledLocation = nconf.get('keycloak:installedLocation');
+  let keycloakInstalledLocation = nconf.get('keycloak:installedlocation');
   const last = keycloakInstalledLocation.slice(-1);
   if (last !== '/') {
     keycloakInstalledLocation += '/';
   }
   const kcadm = `${keycloakInstalledLocation}bin/kcadm.sh`;
-  const keycloakBase = nconf.get('keycloak:baseURL');
-  const adminUser = nconf.get('keycloak:adminUser');
-  const adminPassword = nconf.get('keycloak:adminPassword');
+  const keycloakBase = nconf.get('keycloak:baseurl');
+  const adminUser = nconf.get('keycloak:adminuser');
+  const adminPassword = nconf.get('keycloak:adminpassword');
   async.parallel({
     realm: (callback) => {
       exec(`sh ${kcadm} config credentials --server ${keycloakBase} --realm master --user ${adminUser} --password ${adminPassword}`, (err, stdout, stderr) => {

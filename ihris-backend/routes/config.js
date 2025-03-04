@@ -2036,9 +2036,9 @@ router.get('/app', (req, res) => {
     const otherConfig = {
         idp: nconf.get('app:idp'),
         keycloak: {
-            baseURL: nconf.get('keycloak:baseURL'),
+            baseURL: nconf.get('keycloak:baseurl'),
             realm: nconf.get('keycloak:realm'),
-            UIClientId: nconf.get('keycloak:UIClientId'),
+            UIClientId: nconf.get('keycloak:uiclientid'),
         },
     };
     res.status(200).json(otherConfig);

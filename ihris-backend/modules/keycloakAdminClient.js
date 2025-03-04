@@ -14,7 +14,7 @@ const ASSIGN_ROLE_EXTENSION = `${nconf.get('profileBaseUrl')}/StructureDefinitio
 
 const kcAdminClient = new KcAdminClient({
   realmName: nconf.get('keycloak:realm'),
-  baseUrl: nconf.get('keycloak:baseURL'),
+  baseUrl: nconf.get('keycloak:baseurl'),
   requestConfig: {
     httpsAgent: new https.Agent({
       rejectUnauthorized: false,
@@ -25,7 +25,7 @@ const credentials = {
   username: nconf.get('keycloak:RESTClientUser'),
   password: nconf.get('keycloak:RESTClientPassword'),
   grantType: 'password',
-  clientId: nconf.get('keycloak:UIClientId'),
+  clientId: nconf.get('keycloak:uiclientid'),
 };
 kcAdminClient.auth(credentials).catch((err) => {
   logger.error('Failed to initialize keycloak');
@@ -48,7 +48,7 @@ const loadTasksToKeycloak = () => new Promise(async (resolve, reject) => {
     return resolve()
   }
   const clients = await kcAdminClient.clients.find();
-  const client = clients.find(clt => clt.clientId === nconf.get('keycloak:UIClientId'));
+  const client = clients.find(clt => clt.clientId === nconf.get('keycloak:uiclientid'));
   if (!client) {
     return reject();
   }
@@ -197,7 +197,7 @@ const loadTasksToKeycloak = () => new Promise(async (resolve, reject) => {
 const loadRolesToKeycloak = () => new Promise(async (resolve, reject) => {
   const fshDir = nconf.get('builtFSHFIles');
   const clients = await kcAdminClient.clients.find();
-  const client = clients.find(clt => clt.clientId === nconf.get('keycloak:UIClientId'));
+  const client = clients.find(clt => clt.clientId === nconf.get('keycloak:uiclientid'));
   if (!client) {
     return reject();
   }
@@ -396,7 +396,7 @@ const populateRoleTasks = ({ token, user }) => new Promise(async (resolve, rejec
   }
   let roleBasicName;
   kcAdminClient.clients.find().then((clients) => {
-    const client = clients.find(clt => clt.clientId === nconf.get('keycloak:UIClientId'));
+    const client = clients.find(clt => clt.clientId === nconf.get('keycloak:uiclientid'));
     if (!client) {
       return reject();
     }
