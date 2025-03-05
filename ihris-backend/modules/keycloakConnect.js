@@ -9,7 +9,7 @@ const keycloakConfig = {
   realm: nconf.get('keycloak:realm'),
   clientId: nconf.get('keycloak:backendClientId'),
   bearerOnly: true,
-  serverUrl: nconf.get('keycloak:baseURL'),
+  serverUrl: nconf.get('keycloak:baseurl'),
 };
 
 function initKeycloak(store) {
