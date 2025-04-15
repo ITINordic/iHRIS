@@ -48,3 +48,4 @@ typings/
 *.swp
 
 rsa_1024_priv.pem
+.DS_Store
